@@ -1,0 +1,49 @@
+<html>
+
+	<head>
+		<title>Backbone</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="underscore-min.js"></script>
+		<script src="backbone-min.js"></script>
+		
+	</head>
+	<body>
+		<div id="bind" style="width:100px; height:100px; background-color: #FF00FF"></div>
+		
+		<script>
+			var object = {};
+			
+			_.extend(object, Backbone.Events);
+			
+			object.on("go", function(msg){
+				alert("Triggered" + msg);
+			});
+			
+			object.trigger("go"," an event");
+		
+			var BindDiv = Backbone.Model.extend({
+				promptColor: function(){
+					var newColor = 'rgb('+ (Math.floor(Math.random() * 256)) + ','
+						  + (Math.floor(Math.random() * 256)) + ','
+                          + (Math.floor(Math.random() * 256)) + ')';
+                	console.log('in');
+                	this.set({color: newColor});
+                	this.batatinhas();
+				},
+				batatinhas: function(){
+					alert(123);
+				}
+			});
+
+			window.bind = new BindDiv;
+			
+			bind.on('change:color', function(model, color){
+				$('#bind').css({background: color});
+			});
+			
+			bind.promptColor();
+
+
+		</script>	
+	</body>
+</html>
